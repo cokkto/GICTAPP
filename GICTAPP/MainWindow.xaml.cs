@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -25,6 +24,7 @@ using System.ComponentModel;
 
 namespace GICTAPP
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -33,22 +33,13 @@ namespace GICTAPP
 
         private System.Windows.Controls.Image[] myImages;
         private Game myGame;
-        ICommand _command;
-        public ICommand MyCommand
-        {
-            get
-            {
-                return _command;
-            }
-            set
-            {
-                _command = value;
-            }
-        }
+        private MyViewModel _dataContext;
         public MainWindow()
         {
             InitializeComponent();
-            _command = new DelegateCommand(ImageClick);
+            _dataContext = new MyViewModel();
+            DataContext = _dataContext;
+            _dataContext.MyCommand = new RelayCommand(p => true, p => ImageClick(p));
             Start();
         }
         private void ImageClick(object obj)
