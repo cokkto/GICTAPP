@@ -15,10 +15,10 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Data.SqlClient;
 using System.Data;
-using System.Drawing;
+//using System.Drawing;
 using System.Drawing.Imaging;
 using System.ComponentModel;
-
+using System.Windows.Controls;
 
 
 
@@ -31,7 +31,7 @@ namespace GICTAPP
     public partial class MainWindow : Window
     {
 
-        private System.Windows.Controls.Image[] myImages;
+        private List<Image> _myImages = new List<Image>();
         private Game myGame;
         private MyViewModel _dataContext;
         public MainWindow()
@@ -44,7 +44,11 @@ namespace GICTAPP
         }
         private void ImageClick(object obj)
         {
-            var t = obj; 
+            var index = Convert.ToInt32(obj);
+            if (_myImages.)
+            {
+                
+            }
         }
         private void Start()
         {
@@ -125,7 +129,7 @@ namespace GICTAPP
             switch (size)
             {
                 case 20:
-                    myImages = new System.Windows.Controls.Image[20] { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16, image17, image18, image19, image20 };
+                    _myImages.AddRange(new List<Image> { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16, image17, image18, image19, image20 });
                     btn_img21.Visibility = Visibility.Hidden;
                     
                     btn_img22.Visibility = Visibility.Hidden;
@@ -139,7 +143,7 @@ namespace GICTAPP
                     btn_img30.Visibility = Visibility.Hidden;
                     break;
                 case 24:
-                    myImages = new System.Windows.Controls.Image[24] { image1, image2, image3, image4, image6, image7, image8, image9, image11, image12, image13, image14, image16, image17, image18, image19, image21, image22, image23, image24, image26, image27, image28, image29 };
+                    _myImages.AddRange(new List<Image> { image1, image2, image3, image4, image6, image7, image8, image9, image11, image12, image13, image14, image16, image17, image18, image19, image21, image22, image23, image24, image26, image27, image28, image29 });
                     btn_img5.Visibility = Visibility.Hidden;
                     btn_img10.Visibility = Visibility.Hidden;
                     btn_img15.Visibility = Visibility.Hidden;
@@ -148,147 +152,18 @@ namespace GICTAPP
                     btn_img30.Visibility = Visibility.Hidden;
                     break;
                 default:
-                    myImages = new System.Windows.Controls.Image[30] { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16, image17, image18, image19, image20, image21, image22, image23, image24, image25, image26, image27, image28, image29, image30 };
+                    _myImages.AddRange(new List<Image>  { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16, image17, image18, image19, image20, image21, image22, image23, image24, image25, image26, image27, image28, image29, image30 });
                     break;
             }
         }
 
         public void Step3()
         {
-            myGame.FillGameBoard(myImages);
+            myGame.FillGameBoard(_myImages);
 
         }
 
-
-
-
-
-
-
-        private void Image1Button_Click(object sender, RoutedEventArgs e)
-        {
-            image1.Visibility = Visibility.Hidden;
-        }
-        private void Image2Button_Click(object sender, RoutedEventArgs e)
-        {
-            image2_.Visibility = Visibility.Hidden;
-        }
-        private void Image3Button_Click(object sender, RoutedEventArgs e)
-        {
-            image3.Visibility = Visibility.Hidden;
-        }
-        private void Image4Button_Click(object sender, RoutedEventArgs e)
-        {
-            image4.Visibility = Visibility.Hidden;
-        }
-        private void Image5Button_Click(object sender, RoutedEventArgs e)
-        {
-            image5.Visibility = Visibility.Hidden;
-        }
-        private void Image6Button_Click(object sender, RoutedEventArgs e)
-        {
-            image6.Visibility = Visibility.Hidden;
-        }
-        private void Image7Button_Click(object sender, RoutedEventArgs e)
-        {
-            image7.Visibility = Visibility.Hidden;
-        }
-        private void Image8Button_Click(object sender, RoutedEventArgs e)
-        {
-            image8.Visibility = Visibility.Hidden;
-        }
-        private void Image9Button_Click(object sender, RoutedEventArgs e)
-        {
-            image9.Visibility = Visibility.Hidden;
-        }
-        private void Image10Button_Click(object sender, RoutedEventArgs e)
-        {
-            image10.Visibility = Visibility.Hidden;
-        }
-
-
-        private void Image11Button_Click(object sender, RoutedEventArgs e)
-        {
-            image11.Visibility = Visibility.Hidden;
-        }
-        private void Image12Button_Click(object sender, RoutedEventArgs e)
-        {
-            image12.Visibility = Visibility.Hidden;
-        }
-        private void Image13Button_Click(object sender, RoutedEventArgs e)
-        {
-            image13.Visibility = Visibility.Hidden;
-        }
-        private void Image14Button_Click(object sender, RoutedEventArgs e)
-        {
-            image14.Visibility = Visibility.Hidden;
-        }
-        private void Image15Button_Click(object sender, RoutedEventArgs e)
-        {
-            image15.Visibility = Visibility.Hidden;
-        }
-        private void Image16Button_Click(object sender, RoutedEventArgs e)
-        {
-            image16.Visibility = Visibility.Hidden;
-        }
-        private void Image17Button_Click(object sender, RoutedEventArgs e)
-        {
-            image17.Visibility = Visibility.Hidden;
-        }
-        private void Image18Button_Click(object sender, RoutedEventArgs e)
-        {
-            image18.Visibility = Visibility.Hidden;
-        }
-        private void Image19Button_Click(object sender, RoutedEventArgs e)
-        {
-            image19.Visibility = Visibility.Hidden;
-        }
-        private void Image20Button_Click(object sender, RoutedEventArgs e)
-        {
-            image20.Visibility = Visibility.Hidden;
-        }
-
-
-        private void Image21Button_Click(object sender, RoutedEventArgs e)
-        {
-            image21.Visibility = Visibility.Hidden;
-        }
-        private void Image22Button_Click(object sender, RoutedEventArgs e)
-        {
-            image22.Visibility = Visibility.Hidden;
-        }
-        private void Image23Button_Click(object sender, RoutedEventArgs e)
-        {
-            image23.Visibility = Visibility.Hidden;
-        }
-        private void Image24Button_Click(object sender, RoutedEventArgs e)
-        {
-            image24.Visibility = Visibility.Hidden;
-        }
-        private void Image25Button_Click(object sender, RoutedEventArgs e)
-        {
-            image25.Visibility = Visibility.Hidden;
-        }
-        private void Image26Button_Click(object sender, RoutedEventArgs e)
-        {
-            image26.Visibility = Visibility.Hidden;
-        }
-        private void Image27Button_Click(object sender, RoutedEventArgs e)
-        {
-            image27.Visibility = Visibility.Hidden;
-        }
-        private void Image28Button_Click(object sender, RoutedEventArgs e)
-        {
-            image28.Visibility = Visibility.Hidden;
-        }
-        private void Image29Button_Click(object sender, RoutedEventArgs e)
-        {
-            image29.Visibility = Visibility.Hidden;
-        }
-        private void Image30Button_Click(object sender, RoutedEventArgs e)
-        {
-            image30.Visibility = Visibility.Hidden;
-        }
+        
 
     }
 

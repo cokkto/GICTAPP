@@ -25,7 +25,7 @@ namespace GICTAPP
             _connectionString = string.Concat("Data Source=(LocalDB)\\v11.0; AttachDbFilename=", path, "\\GICTAPPDATA.mdf; Integrated Security=True");
         }
 
-        public void FillGameBoard(Image[] myImages)
+        public void FillGameBoard(List<Image> myImages)
         {
             rndForDB = Random(numOfGO / 2);
             places = Random(numOfGO);
