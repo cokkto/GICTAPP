@@ -5,6 +5,9 @@ using System.Windows.Data;
 
 namespace GICTAPP
 {
+    /// <summary>
+    ///     Valueonverter bool to Visibility when false == Hidden
+    /// </summary>
     public class ConverterBoolToVisibility : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

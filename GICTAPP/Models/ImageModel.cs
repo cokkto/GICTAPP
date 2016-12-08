@@ -7,6 +7,9 @@ using System.Windows.Media.Imaging;
 
 namespace GICTAPP
 {
+    /// <summary>
+    ///     Model of card
+    /// </summary>
     public class ImageModel : Model
     {
         private bool _isCoverVisible;
@@ -18,17 +21,26 @@ namespace GICTAPP
             _guid = Guid.NewGuid().ToString();
         }
 
+        /// <summary>
+        ///     Card unique Id
+        /// </summary>
         public string Id
         {
             get { return _guid; }
         }
 
+        /// <summary>
+        ///     Is card hidden
+        /// </summary>
         public bool IsCoverVisible
         {
             get { return _isCoverVisible; }
             set { SetProperty(ref _isCoverVisible, value); }
         }
 
+        /// <summary>
+        ///     Card image source
+        /// </summary>
         public string ImageSource
         {
             get { return _imageSource; }

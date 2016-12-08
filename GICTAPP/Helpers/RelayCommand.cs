@@ -6,6 +6,9 @@ using System.Windows.Input;
 
 namespace GICTAPP
 {
+    /// <summary>
+    ///     Wrapper over ICommand interface to implement Execute and CanEecute functionality
+    /// </summary>
     public class RelayCommand : ICommand
     {
         private Predicate<object> _canExecute;
@@ -17,17 +20,27 @@ namespace GICTAPP
             this._execute = execute;
         }
 
+        /// <summary>
+        ///     Event to raise CanExecute on changes
+        /// </summary>
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
 
+        /// <summary>
+        ///     Evaluate posibility to execute command
+        /// </summary>
         public bool CanExecute(object parameter)
         {
             return _canExecute(parameter);
         }
 
+        /// <summary>
+        ///     Execute command
+        /// </summary>
+        /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
             _execute(parameter);

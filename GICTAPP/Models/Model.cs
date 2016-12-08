@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace GICTAPP
 {
+    /// <summary>
+    ///     Wrapper over INotifyPropertyChanged to raise propertyChanged events in bound models
+    /// </summary>
     public class Model : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

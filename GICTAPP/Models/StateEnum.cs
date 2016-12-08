@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace GICTAPP
 {
+    /// <summary>
+    ///     Game state enum
+    /// </summary>
     public enum StateEnum
     {
         AllClosed,
