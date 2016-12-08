@@ -10,6 +10,7 @@
 
     <Window.Resources>
         <gictapp:ConverterBoolToVisibility x:Key="ConverterBoolToVisibility"/>
+        <gictapp:ConvertBoolToVisibilityInvert x:Key="ConvertBoolToVisibilityInvert"/>
         
         <Style
             TargetType="{x:Type Button}"
@@ -101,7 +102,7 @@
                     <DataTemplate DataType="{x:Type gictapp:ImageModel}">
                         <Button Command="{Binding DataContext.CommandSwapCard, RelativeSource={RelativeSource FindAncestor,ItemsControl,1}}" CommandParameter="{Binding .}" Style="{StaticResource ImageButtonStyle}">
                             <Grid Margin="15">
-                                <Image Source="{Binding ImageSource}" Width="70" Stretch="Uniform" StretchDirection="Both"/>
+                                <Image Source="{Binding ImageSource}" Visibility="{Binding IsCoverVisible, Converter={StaticResource ConvertBoolToVisibilityInvert}}" Width="70" Stretch="Uniform" StretchDirection="Both"/>
                                 <Image Source="pack://application:,,,/GICTAPP;component/Images/11.jpg" Visibility="{Binding IsCoverVisible, Converter={StaticResource ConverterBoolToVisibility}}" Width="70"  Stretch="Uniform" StretchDirection="Both" />
 
                             </Grid>

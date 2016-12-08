@@ -71,6 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\ConvertBoolToVisibilityInvert.cs" />
     <Compile Include="Helpers\ConverterBoolToVisibility.cs" />
     <Compile Include="Helpers\DataBaseCommunication.cs" />
     <Compile Include="Images\ImageResources.Designer.cs">

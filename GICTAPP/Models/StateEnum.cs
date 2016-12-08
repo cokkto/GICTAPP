@@ -8,7 +8,8 @@ namespace GICTAPP
 {
     public enum StateEnum
     {
-        active = 1, 
-        inactive = 0
+        AllClosed,
+        OneOpened,
+        TwoOpened
     }
 }
