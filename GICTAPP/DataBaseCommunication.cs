@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace GICTAPP
 {
@@ -10,7 +14,7 @@ namespace GICTAPP
     {
         SqlConnection connection;
 
-        public DataBase_Communication(string path)
+        public DataBaseCommunication(string path)
         {
             connection = new SqlConnection(path);
         }

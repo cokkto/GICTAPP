@@ -33,12 +33,28 @@ namespace GICTAPP
 
         private System.Windows.Controls.Image[] myImages;
         private Game myGame;
+        ICommand _command;
+        public ICommand MyCommand
+        {
+            get
+            {
+                return _command;
+            }
+            set
+            {
+                _command = value;
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
+            _command = new DelegateCommand(ImageClick);
             Start();
         }
-
+        private void ImageClick(object obj)
+        {
+            var t = obj; 
+        }
         private void Start()
         {
             Form1.Visibility = Visibility.Hidden;
@@ -158,13 +174,13 @@ namespace GICTAPP
 
 
 
-        //private void Image1Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    image1.Visibility = Visibility.Hidden;
-        //}
+        private void Image1Button_Click(object sender, RoutedEventArgs e)
+        {
+            image1.Visibility = Visibility.Hidden;
+        }
         private void Image2Button_Click(object sender, RoutedEventArgs e)
         {
-            image2.Visibility = Visibility.Hidden;
+            image2_.Visibility = Visibility.Hidden;
         }
         private void Image3Button_Click(object sender, RoutedEventArgs e)
         {

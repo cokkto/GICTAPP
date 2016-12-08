@@ -29,23 +29,23 @@ namespace GICTAPP
         {
             rndForDB = Random(numOfGO / 2);
             places = Random(numOfGO);
-			using(var myDb = new DataBaseCommunication(connection))
+			using(var myDb = new DataBaseCommunication(_connectionString))
 			{
-				_myDB.Connection_Open();
+				myDb.Connection_Open();
 
 				for (int i = 0; i < rndForDB.Length; i++)
 				{
-					myImages[places[i]].Source = _myDB.Get_Images(rndForDB[i]);
+					myImages[places[i]].Source = myDb.Get_Images(rndForDB[i]);
 				}
 
 				for (int i = 0; i < rndForDB.Length; i++)
 				{
-					myImages[places[i + numOfGO / 2]].Source = _myDB.Get_Images(rndForDB[i]);
+					myImages[places[i + numOfGO / 2]].Source = myDb.Get_Images(rndForDB[i]);
 				}
 
 				//myImages[0].Source = myDB.Get_Images(15);
 
-				_myDB.Connection_Close();
+				myDb.Connection_Close();
 			}
         }
 

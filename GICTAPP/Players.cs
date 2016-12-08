@@ -9,9 +9,9 @@ namespace GICTAPP
     public class Players
     {
         private string _name;
-        private State stateofPlayer;
+        private StateEnum stateofPlayer;
 
-        public Players(string name, State state)
+        public Players(string name, StateEnum state)
         {
             _name = name;
             stateofPlayer = state;
