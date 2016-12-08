@@ -1,0 +1,301 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+//using System.Data.OleDb;
+using System.IO;
+using System.Data.SqlClient;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.ComponentModel;
+
+
+
+
+namespace GICTAPP
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        private DataBase_Communication myDB;
+        public MainWindow()
+        {
+            InitializeComponent();
+            myDB = new DataBase_Communication();
+            //myDB.Connection_Open();
+            Start();
+        }
+
+        private void Start()
+        {
+            Form1.Visibility = Visibility.Hidden;
+            NumPlayers.Items.Add("1");
+            NumPlayers.Items.Add("2");
+            NumPlayers.Items.Add("3");
+            NumPlayers.Items.Add("4");
+            NumPlayers.Items.Add("5");
+
+            this.BoardSize.Items.Add("20");
+            this.BoardSize.Items.Add("24");
+            this.BoardSize.Items.Add("30");
+        }
+
+        private void Button_Start_Click(object sender, RoutedEventArgs e)
+        {
+            Game mygame = new Game(NumPlayers.SelectedItem.ToString(), BoardSize.SelectedItem.ToString());
+            Step1(Convert.ToInt32(BoardSize.SelectedItem), Convert.ToInt32(NumPlayers.SelectedItem));
+            Step2(Convert.ToInt32(BoardSize.SelectedItem));
+            Step3();
+        }
+        private void NumPlayers_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
+        private void BoardSize_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
+
+        private void Step1(int size, int numofplayers)
+        {
+            Form1.Visibility = Visibility.Visible;
+            this.NumPlayers.IsEnabled = true;
+            BoardSize.IsEnabled = true;
+            Button_Start.IsEnabled = true;
+            switch (numofplayers)
+            {
+                case (1):
+                    lb_player2.Visibility = Visibility.Hidden;
+                    lb_score_pl2.Visibility = Visibility.Hidden;
+                    lb_player3.Visibility = Visibility.Hidden;
+                    lb_score_pl3.Visibility = Visibility.Hidden;
+                    lb_player4.Visibility = Visibility.Hidden;
+                    lb_score_pl4.Visibility = Visibility.Hidden;
+                    lb_player5.Visibility = Visibility.Hidden;
+                    lb_score_pl5.Visibility = Visibility.Hidden;
+                    break;
+                case (2):
+                    lb_player3.Visibility = Visibility.Hidden;
+                    lb_score_pl3.Visibility = Visibility.Hidden;
+                    lb_player4.Visibility = Visibility.Hidden;
+                    lb_score_pl4.Visibility = Visibility.Hidden;
+                    lb_player5.Visibility = Visibility.Hidden;
+                    lb_score_pl5.Visibility = Visibility.Hidden;
+                    break;
+                case (3):
+                    lb_player4.Visibility = Visibility.Hidden;
+                    lb_score_pl4.Visibility = Visibility.Hidden;
+                    lb_player5.Visibility = Visibility.Hidden;
+                    lb_score_pl5.Visibility = Visibility.Hidden;
+                    break;
+                case (4):
+                    lb_player5.Visibility = Visibility.Hidden;
+                    lb_score_pl5.Visibility = Visibility.Hidden;
+                    break;
+                default:
+                    break;
+
+            }
+
+
+        }
+
+
+        private void Step2(int size)
+        {
+
+        }
+
+
+        public void Step3()
+        {
+            myDB.Connection_Open();
+            myDB.Get_Images(image1);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    public class Game
+    {
+        private Players[] player;
+        private Pictures[] picture;
+        private int numOfGO;
+
+        public Game(string nmofpl, string brds)
+        {
+            player = new Players[Convert.ToInt32(nmofpl)];
+            picture = new Pictures[Convert.ToInt32(brds)];
+            numOfGO = Convert.ToInt32(brds);
+        }
+
+
+        public int[] Random_for_DB()
+        {
+            Random rnd = new Random();
+            int[] array = new int[numOfGO / 2];
+            int k = 0, x;
+            for (int i = 0; k < numOfGO / 2; i++)
+            {
+                x = rnd.Next(15);
+                if (k == 0)  //добавление 1-го элемента массива
+                {
+                    array[k] = x;
+                    k = k + 1;
+                }
+                else  //добавление остальных элементов массива
+                {
+                    int m = 0;
+                    for (int j = 0; j < k; j++)  // проверка совпадений
+                    {
+                        if (array[j] == x) m = m + 1; // счетчик совпадений
+                    }
+                    if (m == 0) // добавление нового элемента при отсутствии совпадений
+                    {
+                        array[k] = x;
+                        k = k + 1;
+                    }
+                }
+            }
+            return array;
+        }
+
+
+
+    }
+    public enum State { active = 1, inactive = 0 };
+    public class Players
+    {
+        private string name;
+        private State stateofPlayer;
+
+        public Players(string nm, int i)
+        {
+            name = nm;
+            stateofPlayer = (State)i;
+        }
+        public int stateOfPl()
+        {
+            return (int)stateofPlayer;
+        }
+
+        public override string ToString()
+        {
+            return name.ToString();
+        }
+
+
+    }
+
+
+    public abstract class GameObject
+    {
+        public string name;
+        protected State stateofGO;
+        public GameObject() { }
+
+        public GameObject(string nm) { name = nm; stateofGO = State.inactive; }
+        public abstract string Display();
+
+        public int StateOfGO()
+        {
+            return (int)stateofGO;
+        }
+
+        //public void DispType()
+        //{
+        //    Console.WriteLine("type: {0}, color: {1}", GetType().Name, color);
+        //    Display();
+        //}
+    }
+
+    public class Pictures : GameObject
+    {
+        public Pictures(string name) : base(name) { }
+
+        public override string Display()
+        {
+            return name;
+        }
+
+    }
+
+
+    public class DataBase_Communication
+    {
+        SqlConnection connection;
+
+        public DataBase_Communication()
+        {
+            connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0; AttachDbFilename=Z:\GICTAPP\GICTAPP\GICTAPPDATA.mdf; Integrated Security=True");
+
+        }
+
+        public BitmapImage Get_Images(int num)
+        {
+
+            string Query = "select content from GameObject where object_id="+num;
+            SqlCommand createCommand = new SqlCommand(Query, connection);
+            createCommand.ExecuteNonQuery();
+            SqlDataAdapter myAdapter1 = new SqlDataAdapter(createCommand);
+            DataTable dt = new DataTable();
+            myAdapter1.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                // Get the byte array from image file
+                byte[] imgBytes = (byte[])row["content"];
+                MemoryStream stream = new MemoryStream();
+                stream.Write(imgBytes, 0, imgBytes.Length);
+                stream.Position = 0;
+
+                System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+
+                MemoryStream ms = new MemoryStream();
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                ms.Seek(0, SeekOrigin.Begin);
+                bi.StreamSource = ms;
+                bi.EndInit();
+                return bi;
+                //image1.Source = bi;
+            }
+            
+
+
+        }
+
+
+
+        public void Connection_Open()
+        {
+            if (connection.State != ConnectionState.Open)
+                connection.Open();
+        }
+
+        public void Connection_Close()
+        {
+            connection.Close();
+        }
+
+    }
+
+}

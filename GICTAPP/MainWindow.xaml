@@ -1,0 +1,162 @@
+﻿<Window x:Class="GICTAPP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Memory Game" Height="960" Width="1200" Background="White">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+
+
+    <Grid x:Name="Rectangle" Height="940" Width="1200">
+
+
+
+        <Label x:Name="Info_lb" Content="Welcome to the memory game!" Margin="194,22,278,857" HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" Width="728"/>
+
+        <Button x:Name="Button_Start" Content="Start" HorizontalAlignment="Left" Margin="729,702,0,0" VerticalAlignment="Top" Width="114" Click="Button_Start_Click" Height="30"/>
+        <Label HorizontalAlignment="Right" Margin="0,236,533,0" VerticalAlignment="Top" Width="507" Height="45">
+            <Label Content="Give a number of players" HorizontalAlignment="Left" VerticalAlignment="Top" Width="502" FontSize="18" Height="45"/>
+        </Label>
+        <ComboBox x:Name="NumPlayers" HorizontalAlignment="Left" Margin="160,325,0,0" VerticalAlignment="Top" Width="184" SelectionChanged="NumPlayers_SelectionChanged" SelectedItem="1" Height="30"/>
+
+        <Label HorizontalAlignment="Left" Margin="160,437,0,0" VerticalAlignment="Top"  Width="507" Height="45">
+            <Label Content="What is a game size?" HorizontalAlignment="Left" VerticalAlignment="Top" Width="502" FontSize="18" Height="45"/>
+        </Label>
+        <ComboBox x:Name="BoardSize" HorizontalAlignment="Left" Margin="160,532,0,0" VerticalAlignment="Top" Width="184" SelectionChanged="NumPlayers_SelectionChanged" SelectedItem="20" Height="30"/>
+
+        <!--second window -->
+
+        <Canvas x:Name="Form1" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="1200" Opacity="100" Grid.ColumnSpan="7" Grid.RowSpan="3" >
+            <Rectangle Fill="#FFF" Height="940" Width="1200" />
+
+
+            <!--Lables with players and their scores-->
+
+            <Label x:Name="lb_player1" Content="Player1" Canvas.Left="961" Canvas.Top="107" Width="79" FontWeight="Bold" Background="LightGreen"/>
+            <Label x:Name="lb_player2" Content="Player2" Canvas.Left="961" Canvas.Top="147" Width="79" FontWeight="Bold" Background="LightGray" />
+            <Label x:Name="lb_player3" Content="Player3" Canvas.Left="961" Canvas.Top="187" Width="79" FontWeight="Bold" Background="LightGray"/>
+            <Label x:Name="lb_player4" Content="Player4" Canvas.Left="961" Canvas.Top="227" Width="79" FontWeight="Bold" Background="LightGray"/>
+            <Label x:Name="lb_player5" Content="Player5" Canvas.Left="961" Canvas.Top="267" Width="79" FontWeight="Bold" Background="LightGray"/>
+
+            <Label x:Name="lb_score_pl1" Content="0" Canvas.Left="1062" Canvas.Top="107" Width="79" FontWeight="Bold" Background="LightGreen"/>
+            <Label x:Name="lb_score_pl2" Content="0" Canvas.Left="1062" Canvas.Top="147" Width="79" FontWeight="Bold" Background="LightGray" />
+            <Label x:Name="lb_score_pl3" Content="0" Canvas.Left="1062" Canvas.Top="187" Width="79" FontWeight="Bold" Background="LightGray"/>
+            <Label x:Name="lb_score_pl4" Content="0" Canvas.Left="1062" Canvas.Top="227" Width="79" FontWeight="Bold" Background="LightGray"/>
+            <Label x:Name="lb_score_pl5" Content="0" Canvas.Left="1062" Canvas.Top="267" Width="79" FontWeight="Bold" Background="LightGray"/>
+
+            <!--Places for images-->
+            <!--почитать про стили для wpf-->
+            <!--First row-->
+            <!--<Button x:Name="btn_img1" Style="{StaticResource ImageButtonStyle}" Click="Image1Button_Click" Canvas.Left="60" Canvas.Top="60"  Height="125" Width="125" >-->
+            <Image x:Name="image1" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly" Canvas.Left="60" Canvas.Top="60"  Height="125" Width="125"/>                
+           <!-- </Button>-->
+            <Button x:Name="btn_img2" Style="{StaticResource ImageButtonStyle}" Click="Image2Button_Click" Canvas.Left="228" Canvas.Top="60"  Height="125" Width="125" >
+                <Image x:Name="image2" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img3" Style="{StaticResource ImageButtonStyle}" Click="Image3Button_Click" Canvas.Left="396" Canvas.Top="60"  Height="125" Width="125" >
+                <Image x:Name="image3" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img4" Style="{StaticResource ImageButtonStyle}" Click="Image4Button_Click" Canvas.Left="564" Canvas.Top="60"  Height="125" Width="125" >
+                <Image x:Name="image4" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img5" Style="{StaticResource ImageButtonStyle}" Click="Image5Button_Click" Canvas.Left="732" Canvas.Top="60"  Height="125" Width="125" >
+                <Image x:Name="image5" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <!--Second row-->
+            <Button x:Name="btn_img6" Style="{StaticResource ImageButtonStyle}" Click="Image6Button_Click" Canvas.Left="60" Canvas.Top="190"  Height="125" Width="125" >
+                <Image x:Name="image6" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img7" Style="{StaticResource ImageButtonStyle}" Click="Image7Button_Click" Canvas.Left="228" Canvas.Top="190"  Height="125" Width="125" >
+                <Image x:Name="image7" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img8" Style="{StaticResource ImageButtonStyle}" Click="Image8Button_Click" Canvas.Left="396" Canvas.Top="190"  Height="125" Width="125" >
+                <Image x:Name="image8" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img9" Style="{StaticResource ImageButtonStyle}" Click="Image9Button_Click" Canvas.Left="564" Canvas.Top="190"  Height="125" Width="125" >
+                <Image x:Name="image9" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img10" Style="{StaticResource ImageButtonStyle}" Click="Image10Button_Click" Canvas.Left="732" Canvas.Top="190"  Height="125" Width="125" >
+                <Image x:Name="image10" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <!--Third row-->
+            <Button x:Name="btn_img11" Style="{StaticResource ImageButtonStyle}" Click="Image11Button_Click" Canvas.Left="60" Canvas.Top="320"  Height="125" Width="125" >
+                <Image x:Name="image11" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img12" Style="{StaticResource ImageButtonStyle}" Click="Image12Button_Click" Canvas.Left="228" Canvas.Top="320"  Height="125" Width="125" >
+                <Image x:Name="image12" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img13" Style="{StaticResource ImageButtonStyle}" Click="Image13Button_Click" Canvas.Left="396" Canvas.Top="320"  Height="125" Width="125" >
+                <Image x:Name="image13" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img14" Style="{StaticResource ImageButtonStyle}" Click="Image14Button_Click" Canvas.Left="564" Canvas.Top="320"  Height="125" Width="125" >
+                <Image x:Name="image14" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img15" Style="{StaticResource ImageButtonStyle}" Click="Image15Button_Click" Canvas.Left="732" Canvas.Top="320"  Height="125" Width="125" >
+                <Image x:Name="image15" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <!--4th row-->
+            <Button x:Name="btn_img16" Style="{StaticResource ImageButtonStyle}" Click="Image16Button_Click" Canvas.Left="60" Canvas.Top="450"  Height="125" Width="125" >
+                <Image x:Name="image16" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img17" Style="{StaticResource ImageButtonStyle}" Click="Image17Button_Click" Canvas.Left="228" Canvas.Top="450"  Height="125" Width="125" >
+                <Image x:Name="image17" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img18" Style="{StaticResource ImageButtonStyle}" Click="Image18Button_Click" Canvas.Left="396" Canvas.Top="450"  Height="125" Width="125" >
+				<Grid>
+					<Image x:Name="image18" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly" Visibility="Collapsed"/>
+					<Image x:Name="image18_" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+				</Grid>
+            </Button>
+            <Button x:Name="btn_img19" Style="{StaticResource ImageButtonStyle}" Click="Image19Button_Click" Canvas.Left="564" Canvas.Top="450"  Height="125" Width="125" >
+                <Image x:Name="image19" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img20" Style="{StaticResource ImageButtonStyle}" Click="Image20Button_Click" Canvas.Left="732" Canvas.Top="450"  Height="125" Width="125" >
+                <Image x:Name="image20" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <!--5th row-->
+            <Button x:Name="btn_img21" Style="{StaticResource ImageButtonStyle}" Click="Image21Button_Click" Canvas.Left="60" Canvas.Top="580"  Height="125" Width="125" >
+                <Image x:Name="image21" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img22" Style="{StaticResource ImageButtonStyle}" Click="Image22Button_Click" Canvas.Left="228" Canvas.Top="580"  Height="125" Width="125" >
+                <Image x:Name="image22" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img23" Style="{StaticResource ImageButtonStyle}" Click="Image23Button_Click" Canvas.Left="396" Canvas.Top="580"  Height="125" Width="125" >
+                <Image x:Name="image23" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img24" Style="{StaticResource ImageButtonStyle}" Click="Image24Button_Click" Canvas.Left="564" Canvas.Top="580"  Height="125" Width="125" >
+                <Image x:Name="image24" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img25" Style="{StaticResource ImageButtonStyle}" Click="Image25Button_Click" Canvas.Left="732" Canvas.Top="580"  Height="125" Width="125" >
+                <Image x:Name="image25" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <!--6th row-->
+            <Button x:Name="btn_img26" Style="{StaticResource ImageButtonStyle}" Click="Image26Button_Click" Canvas.Left="60" Canvas.Top="710"  Height="125" Width="125" >
+                <Image x:Name="image26" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img27" Style="{StaticResource ImageButtonStyle}" Click="Image27Button_Click" Canvas.Left="228" Canvas.Top="710"  Height="125" Width="125" >
+                <Image x:Name="image27" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img28" Style="{StaticResource ImageButtonStyle}" Click="Image28Button_Click" Canvas.Left="396" Canvas.Top="710"  Height="125" Width="125" >
+                <Image x:Name="image28" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img29" Style="{StaticResource ImageButtonStyle}" Click="Image29Button_Click" Canvas.Left="564" Canvas.Top="710"  Height="125" Width="125" >
+                <Image x:Name="image29" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+            <Button x:Name="btn_img30" Style="{StaticResource ImageButtonStyle}" Click="Image30Button_Click" Canvas.Left="732" Canvas.Top="710"  Height="125" Width="125" >
+                <Image x:Name="image30" Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly"/>
+            </Button>
+
+        </Canvas>
+
+    </Grid>
+</Window>
