@@ -99,10 +99,10 @@
                 </ItemsControl.Template>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type gictapp:ImageModel}">
-                        <Button>
-                            <Grid>
-                                <Image Source="pack://application:,,,/GICTAPP;component/11.jpg" StretchDirection="UpOnly" Visibility="{Binding IsCoverVisible, Converter={StaticResource ConverterBoolToVisibility}}" />
-                                <Image Source="{Binding BitmapImage}"/>
+                        <Button Command="{Binding DataContext.CommandSwapCard, RelativeSource={RelativeSource FindAncestor,ItemsControl,1}}" CommandParameter="{Binding .}" Style="{StaticResource ImageButtonStyle}">
+                            <Grid Margin="15">
+                                <Image Source="{Binding ImageSource}" Width="70" Stretch="Uniform" StretchDirection="Both"/>
+                                <Image Source="pack://application:,,,/GICTAPP;component/Images/11.jpg" Visibility="{Binding IsCoverVisible, Converter={StaticResource ConverterBoolToVisibility}}" Width="70"  Stretch="Uniform" StretchDirection="Both" />
 
                             </Grid>
                         </Button>

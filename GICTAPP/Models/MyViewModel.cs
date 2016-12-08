@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Documents;
 using System.Windows.Input;
 
@@ -11,12 +12,19 @@ namespace GICTAPP
         private List<int> _playersoptions;
         private List<int> _cardsOptions;
         private int _numberOfCards;
-        private List<ImageModel> _images;
+        private ObservableCollection<ImageModel> _images;
+        private ICommand _commandSwapCard;
 
         public ICommand CommandStart
         {
             get { return _myCommand; }
             set { SetProperty(ref _myCommand, value); }
+        }
+
+        public ICommand CommandSwapCard
+        {
+            get { return _commandSwapCard; }
+            set { SetProperty(ref _commandSwapCard, value); }
         }
 
         public int NumberOfPlayers
@@ -43,9 +51,9 @@ namespace GICTAPP
             set { SetProperty(ref _numberOfCards, value); }
         }
 
-        public List<ImageModel> Images
+        public ObservableCollection<ImageModel> Images
         {
-            get { return _images ?? (_images = new List<ImageModel>()); }
+            get { return _images ?? (_images = new ObservableCollection<ImageModel>()); }
             set { SetProperty(ref _images, value); }
         }
     }

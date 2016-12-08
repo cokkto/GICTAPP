@@ -9,19 +9,19 @@ namespace GICTAPP
 {
     public class ImageModel : Model
     {
-        private BitmapImage _bitmapImage;
         private bool _isCoverVisible;
-
-        public BitmapImage BitmapImage
-        {
-            get { return _bitmapImage; }
-            set { SetProperty(ref _bitmapImage, value); }
-        }
+        private string _imageSource;
 
         public bool IsCoverVisible
         {
             get { return _isCoverVisible; }
             set { SetProperty(ref _isCoverVisible, value); }
+        }
+
+        public string ImageSource
+        {
+            get { return _imageSource; }
+            set  { SetProperty(ref _imageSource, value); }
         }
     }
 }
