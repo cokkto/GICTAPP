@@ -2,47 +2,54 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace GICTAPP
 {
     public class DataBaseCommunication : IDisposable
     {
-        SqlConnection connection;
+        private readonly SqlConnection _connection;
 
         public DataBaseCommunication(string path)
         {
-            connection = new SqlConnection(path);
+            _connection = new SqlConnection(path);
+        }
+
+
+        public void Dispose()
+        {
+            if (_connection != null)
+            {
+                Connection_Close();
+            }
         }
 
         public BitmapImage Get_Images(int num)
         {
-
-            string Query = "select content from GameObject where object_id="+num;
-            SqlCommand createCommand = new SqlCommand(Query, connection);
+            var query = "select content from GameObject where object_id=" + num;
+            var createCommand = new SqlCommand(query, _connection);
             createCommand.ExecuteNonQuery();
-            SqlDataAdapter myAdapter1 = new SqlDataAdapter(createCommand);
-            DataTable dt = new DataTable();
+            var myAdapter1 = new SqlDataAdapter(createCommand);
+            var dt = new DataTable();
             myAdapter1.Fill(dt);
 
             foreach (DataRow row in dt.Rows)
             {
                 // Get the byte array from image file
-                byte[] imgBytes = (byte[])row["content"];
-                MemoryStream stream = new MemoryStream();
+                var imgBytes = (byte[]) row["content"];
+                var stream = new MemoryStream();
                 stream.Write(imgBytes, 0, imgBytes.Length);
                 stream.Position = 0;
 
-                System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
-                BitmapImage bi = new BitmapImage();
+                var img = Image.FromStream(stream);
+                var bi = new BitmapImage();
                 bi.BeginInit();
 
-                MemoryStream ms = new MemoryStream();
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                var ms = new MemoryStream();
+                img.Save(ms, ImageFormat.Bmp);
                 ms.Seek(0, SeekOrigin.Begin);
                 bi.StreamSource = ms;
                 bi.EndInit();
@@ -52,23 +59,56 @@ namespace GICTAPP
             return null;
         }
 
+        public List<BitmapImage> Get_Images()
+        {
+            var query = "select content from GameObject";
+            var createCommand = new SqlCommand(query, _connection);
+            createCommand.ExecuteNonQuery();
+            var myAdapter1 = new SqlDataAdapter(createCommand);
+            var dt = new DataTable();
+            myAdapter1.Fill(dt);
+
+            var images = new List<BitmapImage>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                // Get the byte array from image file
+                var imgBytes = (byte[])row["content"];
+                var stream = new MemoryStream();
+                stream.Write(imgBytes, 0, imgBytes.Length);
+                stream.Position = 0;
+
+                var img = Image.FromStream(stream);
+                var bi = new BitmapImage();
+                bi.BeginInit();
+
+                var ms = new MemoryStream();
+                img.Save(ms, ImageFormat.Bmp);
+                ms.Seek(0, SeekOrigin.Begin);
+                bi.StreamSource = ms;
+                bi.EndInit();
+                images.Add(bi);
+                //image1.Source = bi;
+            }
+            return images;
+        }
+
         public void Connection_Open()
         {
-            if (connection.State != ConnectionState.Open)
-                connection.Open();
+            if (_connection.State != ConnectionState.Open)
+                try
+                {
+                    _connection.Open();
+                }
+                catch (Exception e)
+                {
+                    var t = e;
+                }
         }
 
         public void Connection_Close()
         {
-            connection.Close();
+            _connection.Close();
         }
-
-
-    
-public void Dispose()
-{
-    if(connection !=null)
- 	{Connection_Close();}
-}
-}
+    }
 }
