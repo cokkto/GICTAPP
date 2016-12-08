@@ -12,7 +12,7 @@ namespace GICTAPP
         private readonly List<string> _matchedCards = new List<string>();
         private readonly Random _rnd = new Random();
         private readonly MyViewModel _viewModel;
-        private StateEnum _cardsOpened;
+        private StateEnum _cardsOpened = StateEnum.TwoOpened;
 
         public Game(int players, int boards)
         {
