@@ -83,7 +83,7 @@
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\MyViewModel.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
-    <Compile Include="Bi\Players.cs" />
+    <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\StateEnum.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

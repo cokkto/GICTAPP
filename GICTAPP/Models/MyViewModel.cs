@@ -12,8 +12,8 @@ namespace GICTAPP
     {
         private ICommand _myCommand;
         private int _numberOfPlayers;
-        private List<int> _playersoptions;
-        private List<int> _cardsOptions;
+        private ObservableCollection<int> _playersoptions;
+        private ObservableCollection<int> _cardsOptions;
         private int _numberOfCards;
         private ObservableCollection<ImageModel> _images;
         private ICommand _commandSwapCard;
@@ -48,18 +48,18 @@ namespace GICTAPP
         /// <summary>
         ///     Available numbers of players
         /// </summary>
-        public List<int> PlayersOptions
+        public ObservableCollection<int> PlayersOptions
         {
-            get { return _playersoptions ?? (_playersoptions = new List<int>()); }
+            get { return _playersoptions ?? (_playersoptions = new ObservableCollection<int>()); } //сравнение на null
             set { SetProperty(ref _playersoptions, value); }
         }
 
         /// <summary>
         ///     Current number of cards
         /// </summary>
-        public List<int> CardsOptions
+        public ObservableCollection<int> CardsOptions
         {
-            get { return _cardsOptions ?? (_cardsOptions = new List<int>()); }
+            get { return _cardsOptions ?? (_cardsOptions = new ObservableCollection<int>()); }
             set { SetProperty(ref _cardsOptions, value); }
         }
 

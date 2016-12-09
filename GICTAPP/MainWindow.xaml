@@ -92,7 +92,11 @@
         </Grid>
         <Grid
             x:Name="ViewGame">
-            <ItemsControl x:Name="ItemsGrid" ItemsSource="{Binding Images}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
+            <ItemsControl Grid.Column="0" x:Name="ItemsGrid" ItemsSource="{Binding Images}">
                 <ItemsControl.Template>
                     <ControlTemplate>
                         <WrapPanel IsItemsHost="True"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GICTAPP.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -40,6 +41,8 @@ namespace GICTAPP
             var path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             _connectionString = string.Concat("Data Source=(LocalDB)\\v11.0; AttachDbFilename=", path,
                 "\\GICTAPPDATA.mdf; Integrated Security=True");
+
+            
         }
 
         /// <summary>
@@ -60,6 +63,7 @@ namespace GICTAPP
             var image = _viewModel.Images.FirstOrDefault(x => x.Id == ((ImageModel) o).Id);
             if (image == null) return;
             _isStarted = false;
+            //TODO записать вбазу данных game_ig, game_object(images)
             switch (_cardsOpened)
             {
                 // 2 cards opened but not mathed - close previous 2
@@ -69,6 +73,7 @@ namespace GICTAPP
                         .Where(x => x.IsCoverVisible == false && !_matchedCards.Contains(x.Id))
                         .ToList()
                         .ForEach(x => x.IsCoverVisible = true);
+                    
                     _cardsOpened = StateEnum.AllClosed;
                     break;
                 // no cards opened - open this one
@@ -101,8 +106,28 @@ namespace GICTAPP
                 default:
                     break;
             }
-        }
+            //записать ход в базу данных: gameEvent++, записать images
 
+        }
+        public void DataBaseRecordGameObject()
+        {
+
+        }
+        
+        public void DataBaseRecordCurrentGame(PlayerModel player)
+        {
+            string id = DateTime.Today.Ticks.ToString();
+            
+            using (var db = new DataBaseCommunication(_connectionString))
+            {
+                db.Execute(id);
+            }
+        }
+        
+        public void DataBaseRecordPlayer(PlayerModel player)
+        {
+
+        }
         /// <summary>
         ///     Populate gameboard with cards
         /// </summary>
@@ -124,6 +149,14 @@ namespace GICTAPP
             {
                 _viewModel.Images.Add(new ImageModel {ImageSource = image});
             }
+        }
+
+        public void StartGame()
+        {
+            var player = new PlayerModel();
+            DataBaseRecordCurrentGame(player);
+            DataBaseRecordPlayer(player);
+            FillGameBoard();
         }
     }
 }

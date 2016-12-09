@@ -40,9 +40,15 @@ namespace GICTAPP
             ViewGame.Visibility = Visibility.Collapsed;
 
             // populate selectors
-            _dataContext.PlayersOptions.AddRange(new List<int> {1, 2, 3, 4, 5});
+            _dataContext.PlayersOptions.Add(1);
+            _dataContext.PlayersOptions.Add(2);
+            _dataContext.PlayersOptions.Add(3);
+            _dataContext.PlayersOptions.Add(4);
+            _dataContext.PlayersOptions.Add(5);
             _dataContext.NumberOfPlayers = _dataContext.PlayersOptions.FirstOrDefault();
-            _dataContext.CardsOptions.AddRange(new List<int> {20, 24, 30});
+            _dataContext.CardsOptions.Add(20);
+            _dataContext.CardsOptions.Add(24);
+            _dataContext.CardsOptions.Add(30);
             _dataContext.NumberOfCards = _dataContext.CardsOptions.FirstOrDefault();
 
             // attach game logic
@@ -61,8 +67,8 @@ namespace GICTAPP
         {
             ViewStart.Visibility = Visibility.Collapsed;
             ViewGame.Visibility = Visibility.Visible;
-
-            _myGame.FillGameBoard();
+            _myGame.StartGame();
+            
         }
     }
 }
