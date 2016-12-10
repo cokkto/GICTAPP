@@ -15,6 +15,7 @@ namespace GICTAPP
     public partial class MainWindow : Window
     {
         private readonly List<Image> _myImages = new List<Image>();
+        private readonly List<Player> _myPlayers = new List<Player>();
         private MyViewModel _dataContext;
         private Game _myGame;
 
@@ -67,6 +68,7 @@ namespace GICTAPP
         {
             ViewStart.Visibility = Visibility.Collapsed;
             ViewGame.Visibility = Visibility.Visible;
+
             _myGame.StartGame();
             
         }

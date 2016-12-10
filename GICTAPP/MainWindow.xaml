@@ -94,7 +94,8 @@
             x:Name="ViewGame">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="125"/>
+                <ColumnDefinition Width="125"/>
             </Grid.ColumnDefinitions>
             <ItemsControl Grid.Column="0" x:Name="ItemsGrid" ItemsSource="{Binding Images}">
                 <ItemsControl.Template>
@@ -114,6 +115,38 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            
+            <Grid Grid.Column="1">
+                <StackPanel Margin="20">
+                    <Label
+                        Content="Player"
+                        HorizontalAlignment="Center"
+                        FontSize="20" 
+                        />
+                    <ItemsControl x:Name="PlayerGrid" ItemsSource="{Binding Players}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type gictapp:PlayerModel}">
+                                <Grid>
+                                    <Label x:Name="lb_player" Visibility="{Binding IsPlayerVisible, Converter={StaticResource ConvertBoolToVisibilityInvert}}"  Width="70"/>
+                                    <Label x:Name="lb_player_score" Visibility="{Binding PlayerScore}"  Width="20"/>
+                                </Grid>
+                            </DataTemplate>
+                        
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </StackPanel>                
+            </Grid>
+            <Grid Grid.Column="2">
+                <StackPanel Margin="20">
+                    <Label
+                        Content="Score"
+                        HorizontalAlignment="Center"
+                        FontSize="20" />
+
+
+                </StackPanel>
+            </Grid>
         </Grid>
 
         <!--<Grid x:Name="Rectangle" Height="940" Width="1200">
