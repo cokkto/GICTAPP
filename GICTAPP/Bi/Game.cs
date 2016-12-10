@@ -40,9 +40,7 @@ namespace GICTAPP
             // set path to local database
             var path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             _connectionString = string.Concat("Data Source=(LocalDB)\\v11.0; AttachDbFilename=", path,
-                "\\GICTAPPDATA.mdf; Integrated Security=True");
-
-            
+                "\\GICTAPPDATA.mdf; Integrated Security=True");  
         }
 
         /// <summary>

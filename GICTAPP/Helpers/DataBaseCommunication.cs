@@ -113,21 +113,44 @@ namespace GICTAPP
 
         public int Execute(string id)
         {
-            Connection_Open();
-            var sql = "INSERT INTO CurrentGame(object_id,game_id)VALUES (@object_id, @game_id);";
-            var cmd = new SqlCommand(sql, _connection);
-            cmd.Parameters.AddWithValue("@object_id", 0);
-            cmd.Parameters.AddWithValue("@game_id", id);
-            cmd.ExecuteNonQuery();
-            //var sql = "INSERT INTO CurrentGame(object_id,game_id)VALUES (7,8);";
-            sql = "SELECT MAX(id) FROM CurrentGame;";
-            var command = new SqlCommand(sql, _connection);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            using (SqlCommand cmd = _connection.CreateCommand())
             {
-                Console.WriteLine(String.Format("{0}", reader[0]));
+                // Добавить параметры
+                cmd.Parameters.AddWithValue("@object_id", 10);
+                cmd.Parameters.AddWithValue("@game_id", id);
+                cmd.CommandText = "INSERT INTO CurrentGame(object_id,game_id)VALUES (@object_id, @game_id);";
+                //данные добавляются в базу, которая находится в папке Debag. И считываются из нее же.
+                Connection_Open();
+                cmd.ExecuteNonQuery();
+
+                var sql = "SELECT MAX(id) FROM CurrentGame;";
+                var command = new SqlCommand(sql, _connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Console.WriteLine(String.Format("{0}", reader[0]));
+                }
+                
+
+                Connection_Close();
             }
-            Connection_Close();
+
+
+            //Connection_Open();
+            //var sql = "INSERT INTO CurrentGame(object_id,game_id)VALUES (@object_id, @game_id);";
+            //var cmd = new SqlCommand(sql, _connection);
+            //cmd.Parameters.AddWithValue("@object_id", 0);
+            //cmd.Parameters.AddWithValue("@game_id", id);
+            //cmd.ExecuteNonQuery();
+            ////var sql = "INSERT INTO CurrentGame(object_id,game_id)VALUES (7,8);";
+            //sql = "SELECT MAX(id) FROM CurrentGame;";
+            //var command = new SqlCommand(sql, _connection);
+            //SqlDataReader reader = command.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    Console.WriteLine(String.Format("{0}", reader[0]));
+            //}
+            //Connection_Close();
             return Convert.ToInt32(0);
         }
     }
