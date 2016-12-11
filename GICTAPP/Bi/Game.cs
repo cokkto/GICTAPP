@@ -93,6 +93,10 @@ namespace GICTAPP
                             _matchedCards.Add(image.Id);
                             _matchedCards.Add(compare.Id);
                             _cardsOpened = StateEnum.AllClosed;
+                            if (isEndGame())
+                            {
+                                EndGame();
+                            }
                         }
                         else
                         {
@@ -106,6 +110,17 @@ namespace GICTAPP
             //записать ход в базу данных: gameEvent++, записать images
 
         }
+
+        private void EndGame()
+        {
+            System.Windows.MessageBox.Show("Endgame");
+        }
+
+        private bool isEndGame()
+        {
+            return _matchedCards.Count == _viewModel.NumberOfCards;
+        }
+
         public void DataBaseRecordGameObject()
         {
 
