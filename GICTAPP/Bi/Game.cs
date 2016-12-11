@@ -165,9 +165,16 @@ namespace GICTAPP
 
         public void StartGame()
         {
-            var player = new PlayerModel();
-            DataBaseRecordCurrentGame(player);
-            DataBaseRecordPlayer(player);
+            //var player = new PlayerModel();
+            //DataBaseRecordCurrentGame(player);
+            //DataBaseRecordPlayer(player);
+
+            _viewModel.Players.Clear();
+            foreach (var item in _viewModel.PlayerSelector)
+            {
+                _viewModel.Players.Add(new PlayerModel { Name = item.Name });
+            }
+
             FillGameBoard();
         }
 

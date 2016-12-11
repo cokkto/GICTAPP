@@ -20,6 +20,7 @@ namespace GICTAPP
         private PlayerModel _activePlayer;
         private ObservableCollection<PlayerSelectorModel> _playerSelector;
         private ObservableCollection<PlayerModel> _recordedPlayers;
+        private ObservableCollection<PlayerModel> _players;
 
 
         /// <summary>
@@ -134,5 +135,15 @@ namespace GICTAPP
             }
             return _recordedPlayers;
         }
+
+        /// <summary>
+        ///     Players that are playing current game
+        /// </summary>
+        public ObservableCollection<PlayerModel> Players
+        {
+            get { return _players ?? (_players = new ObservableCollection<PlayerModel>()); }
+            set { SetProperty(ref _players, value); }
+        }
+
     }
 }
