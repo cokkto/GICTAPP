@@ -10,7 +10,7 @@ namespace GICTAPP
     {
         private string _id;
         private string _name;
-        private bool _isPlayerVisible;
+        private bool _isPlayerActive;
         private int _playerScore;
 
         public PlayerModel()
@@ -39,10 +39,10 @@ namespace GICTAPP
         // <summary>
         ///     Is player hidden
         /// </summary>
-        public bool IsPlayerVisible
+        public bool IsPlayerActive
         {
-            get { return _isPlayerVisible; }
-            set { SetProperty(ref _isPlayerVisible, value); }
+            get { return _isPlayerActive; }
+            set { SetProperty(ref _isPlayerActive, value); }
         }
 
         /// <summary>

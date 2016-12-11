@@ -127,8 +127,8 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type gictapp:PlayerModel}">
                                 <Grid>
-                                    <Label x:Name="lb_player" Visibility="{Binding IsPlayerVisible, Converter={StaticResource ConvertBoolToVisibilityInvert}}"  Width="70"/>
-                                    <Label x:Name="lb_player_score" Visibility="{Binding PlayerScore}"  Width="20"/>
+                                    <Label x:Name="lb_player" IsEnabled="{Binding IsPlayerActive}" Content="{Binding Name}"  Width="70"/>
+                                    <Label x:Name="lb_player_score" Content="{Binding PlayerScore}"  Width="20"/>
                                 </Grid>
                             </DataTemplate>
                         

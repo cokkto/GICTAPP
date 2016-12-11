@@ -17,6 +17,8 @@ namespace GICTAPP
         private int _numberOfCards;
         private ObservableCollection<ImageModel> _images;
         private ICommand _commandSwapCard;
+        private PlayerModel _activePlayer;
+        
 
         /// <summary>
         ///     Start game command
@@ -79,6 +81,20 @@ namespace GICTAPP
         {
             get { return _images ?? (_images = new ObservableCollection<ImageModel>()); }
             set { SetProperty(ref _images, value); }
+        }
+
+        // <summary>
+        ///     Is player hidden
+        /// </summary>
+        public PlayerModel ActivePlayer
+        {
+            get { return _activePlayer; }
+            set { SetProperty(ref _activePlayer, value); }
+        }
+
+        public bool ActiveId()
+        {
+            return false;
         }
     }
 }
