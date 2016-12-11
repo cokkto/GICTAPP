@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiteDB;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,16 @@ using System.Reflection;
 
 namespace GICTAPP
 {
+    public class Customer
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string[] Phones { get; set; }
+        public bool IsActive { get; set; }
+    }
+
+
+
     /// <summary>
     ///     Game logic
     /// </summary>
@@ -40,6 +51,39 @@ namespace GICTAPP
             var path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             _connectionString = string.Concat("Data Source=(LocalDB)\\v11.0; AttachDbFilename=", path,
                 "\\GICTAPPDATA.mdf; Integrated Security=True");
+
+
+            // Open database (or create if not exits)
+            var path_ = Directory.GetCurrentDirectory() + "/Data/";
+            bool exists = Directory.Exists(path_);
+            if (!exists) { Directory.CreateDirectory(path_); }
+            using (var db = new LiteDatabase(path_ + "MyData.db"))
+            {
+                // Get customer collection
+                var customers = db.GetCollection<Customer>("customers");
+
+                // Create your new customer instance
+                var customer = new Customer
+                {
+                    Name = "John Doe2",
+                    Phones = new string[] { "8000-0000", "9000-0000" },
+                    IsActive = true
+                };
+
+                // Insert new customer document (Id will be auto-incremented)
+                customers.Insert(customer);
+
+                // Update a document inside a collection
+                customer.Name = "Joana Doe";
+
+                customers.Update(customer);
+
+                // Index document using a document property
+                customers.EnsureIndex(x => x.Name);
+
+                // Use Linq to query documents
+                var results = customers.Find(x => x.Name.StartsWith("Jo"));
+            }
         }
 
         /// <summary>
@@ -51,13 +95,13 @@ namespace GICTAPP
         {
             if (!(obj is ImageModel)) return false;
             if (_isStarted) return true;
-            return ((ImageModel) obj).IsCoverVisible && !_matchedCards.Contains(((ImageModel) obj).Id);
+            return ((ImageModel)obj).IsCoverVisible && !_matchedCards.Contains(((ImageModel)obj).Id);
         }
 
         private void ExecuteSwapCard(object o)
         {
             if (!(o is ImageModel)) return;
-            var image = _viewModel.Images.FirstOrDefault(x => x.Id == ((ImageModel) o).Id);
+            var image = _viewModel.Images.FirstOrDefault(x => x.Id == ((ImageModel)o).Id);
             if (image == null) return;
             _isStarted = false;
             switch (_cardsOpened)
@@ -108,7 +152,7 @@ namespace GICTAPP
         /// </summary>
         public void FillGameBoard()
         {
-            var halfCards = _viewModel.NumberOfCards/2;
+            var halfCards = _viewModel.NumberOfCards / 2;
             var path = Directory.GetCurrentDirectory() + "/Resources/";
             // get images from folder
             var images = Directory
@@ -122,7 +166,7 @@ namespace GICTAPP
             // assign to viewmodel
             foreach (var image in images)
             {
-                _viewModel.Images.Add(new ImageModel {ImageSource = image});
+                _viewModel.Images.Add(new ImageModel { ImageSource = image });
             }
         }
     }
