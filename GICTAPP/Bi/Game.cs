@@ -170,5 +170,19 @@ namespace GICTAPP
             DataBaseRecordPlayer(player);
             FillGameBoard();
         }
+
+        public void PrepareGame()
+        {
+            DataBaseGetRecordedPlayers();
+        }
+
+        private void DataBaseGetRecordedPlayers()
+        {
+            _viewModel.RecordedPlayers = _viewModel.SetRecordedPlayers(new List<PlayerModel>
+            {
+                new PlayerModel {  Name = "Player 1" },
+                new PlayerModel {  Name = "Player 2" }
+            });
+        }
     }
 }

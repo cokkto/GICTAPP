@@ -78,7 +78,7 @@
                         ItemsSource="{Binding CardsOptions}"
                         SelectedItem="{Binding NumberOfCards}" />
 
-                    <ItemsControl ItemsSource="{Binding PlayerSelector}">
+                    <ItemsControl x:Name="RecordedPlayers" ItemsSource="{Binding PlayerSelector}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type gictapp:PlayerSelectorModel}">
                                 <Grid>
@@ -87,7 +87,7 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <ComboBox Grid.Column="1" ItemsSource="{Binding DataContext.RecordedPlayers, RelativeSource={RelativeSource FindAncestor,ItemsControl,1}}" DisplayMemberPath="Name"  SelectionChanged="ComboBox_SelectionChanged" Tag="{Binding .}"/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{Binding DataContext.RecordedPlayers, RelativeSource={RelativeSource FindAncestor,ItemsControl,1}}" DisplayMemberPath="Name"  SelectionChanged="ComboBox_SelectionChanged" Tag="{Binding Id}"/>
                                     <TextBox Grid.Column="2" x:Name="PlayersName" Text="{Binding Name}"></TextBox>
                                 </Grid>
                             </DataTemplate>

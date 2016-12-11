@@ -55,6 +55,7 @@ namespace GICTAPP
 
             // attach game logic
             _myGame = new Game(_dataContext);
+            _myGame.PrepareGame();
 
             // assign start button
             _dataContext.CommandStart = new RelayCommand(c => true, StartGame);
@@ -76,7 +77,10 @@ namespace GICTAPP
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            var cb = (ComboBox)sender;
+            var item = _dataContext.PlayerSelector.ElementAt((int)((cb).Tag));
+            var model = cb.SelectedItem as PlayerModel;
+            item.Name = model.Name;
         }
     }
 }
