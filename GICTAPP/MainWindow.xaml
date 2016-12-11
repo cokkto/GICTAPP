@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gictapp="clr-namespace:GICTAPP"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Title="Memory Game"
     Height="960"
     Width="1200"
@@ -76,6 +77,23 @@
                         HorizontalAlignment="Left"
                         ItemsSource="{Binding CardsOptions}"
                         SelectedItem="{Binding NumberOfCards}" />
+
+                    <ItemsControl ItemsSource="{Binding PlayerSelector}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type gictapp:PlayerSelectorModel}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox Grid.Column="1" ItemsSource="{Binding DataContext.RecordedPlayers, RelativeSource={RelativeSource FindAncestor,ItemsControl,1}}" DisplayMemberPath="Name"  SelectionChanged="ComboBox_SelectionChanged" Tag="{Binding .}"/>
+                                    <TextBox Grid.Column="2" x:Name="PlayersName" Text="{Binding Name}"></TextBox>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    
                 </StackPanel>
             </Grid>
             <Grid

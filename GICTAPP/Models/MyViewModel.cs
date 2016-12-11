@@ -18,7 +18,9 @@ namespace GICTAPP
         private ObservableCollection<ImageModel> _images;
         private ICommand _commandSwapCard;
         private PlayerModel _activePlayer;
-        
+        private ObservableCollection<PlayerSelectorModel> _playerSelector;
+        private ObservableCollection<PlayerSelectorModel> _recordedPlayers;
+
 
         /// <summary>
         ///     Start game command
@@ -44,7 +46,30 @@ namespace GICTAPP
         public int NumberOfPlayers
         {
             get { return _numberOfPlayers; }
-            set { SetProperty(ref _numberOfPlayers, value); }
+            set
+            {
+                SetProperty(ref _numberOfPlayers, value);
+                PlayerSelector.Clear();
+                for (int i = 0; i < _numberOfPlayers; i++)
+                {
+                    PlayerSelector.Add(new PlayerSelectorModel());
+                }
+            }
+        }
+
+        public ObservableCollection<PlayerSelectorModel> PlayerSelector
+        {
+            get
+            {
+                return _playerSelector ?? (_playerSelector = new ObservableCollection<PlayerSelectorModel>());
+            }
+            set { SetProperty(ref _playerSelector, value); }
+        }
+
+        public ObservableCollection<PlayerSelectorModel> RecordedPlayers
+        {
+            get { return _recordedPlayers ?? (_recordedPlayers = SetRecordedPlayers()); }
+            set { SetProperty(ref _recordedPlayers, value); }
         }
 
         /// <summary>
@@ -95,6 +120,19 @@ namespace GICTAPP
         public bool ActiveId()
         {
             return false;
+        }
+
+        public ObservableCollection<PlayerSelectorModel> SetRecordedPlayers(IList<PlayerSelectorModel> models = null)
+        {
+            if (_recordedPlayers == null) _recordedPlayers = new ObservableCollection<PlayerSelectorModel>();
+            RecordedPlayers.Clear();
+            RecordedPlayers.Add(new PlayerSelectorModel { Name = "New player", Id = null });
+            if (models == null) return _recordedPlayers;
+            foreach (var item in models)
+            {
+                RecordedPlayers.Add(item);
+            }
+            return _recordedPlayers;
         }
     }
 }

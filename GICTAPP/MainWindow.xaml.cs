@@ -73,5 +73,10 @@ namespace GICTAPP
             _myGame.StartGame();
             
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
