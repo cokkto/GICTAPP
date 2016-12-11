@@ -138,17 +138,17 @@ namespace GICTAPP
             return Convert.ToInt32(0);
         }
 
-        public List<string> GetPlayer()
+        public List<PlayerModel> GetPlayer()
         {
             var sql = "Select name From Player";
             var cmd = new SqlCommand(sql, _connection);
             Connection_Open();
             SqlDataReader dataReader = cmd.ExecuteReader();
 
-            List<string> name = new List<string>();
+            List<PlayerModel> name = new List<PlayerModel>();
             while (dataReader.Read())
             {
-                name.Add(dataReader.GetString(0).ToString());
+                name.Add(new PlayerModel { Name = dataReader.GetString(0).ToString() });
             }
             dataReader.Close();
 

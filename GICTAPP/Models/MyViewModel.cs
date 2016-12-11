@@ -19,7 +19,7 @@ namespace GICTAPP
         private ICommand _commandSwapCard;
         private PlayerModel _activePlayer;
         private ObservableCollection<PlayerSelectorModel> _playerSelector;
-        private ObservableCollection<PlayerSelectorModel> _recordedPlayers;
+        private ObservableCollection<PlayerModel> _recordedPlayers;
 
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace GICTAPP
                 PlayerSelector.Clear();
                 for (int i = 0; i < _numberOfPlayers; i++)
                 {
-                    PlayerSelector.Add(new PlayerSelectorModel());
+                    PlayerSelector.Add(new PlayerSelectorModel { Id = i});
                 }
             }
         }
@@ -66,7 +66,7 @@ namespace GICTAPP
             set { SetProperty(ref _playerSelector, value); }
         }
 
-        public ObservableCollection<PlayerSelectorModel> RecordedPlayers
+        public ObservableCollection<PlayerModel> RecordedPlayers
         {
             get { return _recordedPlayers ?? (_recordedPlayers = SetRecordedPlayers()); }
             set { SetProperty(ref _recordedPlayers, value); }
@@ -122,11 +122,11 @@ namespace GICTAPP
             return false;
         }
 
-        public ObservableCollection<PlayerSelectorModel> SetRecordedPlayers(IList<PlayerSelectorModel> models = null)
+        public ObservableCollection<PlayerModel> SetRecordedPlayers(IList<PlayerModel> models = null)
         {
-            if (_recordedPlayers == null) _recordedPlayers = new ObservableCollection<PlayerSelectorModel>();
+            if (_recordedPlayers == null) _recordedPlayers = new ObservableCollection<PlayerModel>();
             RecordedPlayers.Clear();
-            RecordedPlayers.Add(new PlayerSelectorModel { Name = "New player", Id = null });
+            RecordedPlayers.Add(new PlayerModel { Name = "New player" });
             if (models == null) return _recordedPlayers;
             foreach (var item in models)
             {

@@ -166,19 +166,25 @@ namespace GICTAPP
         public void StartGame()
         {
             var player = new PlayerModel();
-            DataBaseGetRecordedPlayers();
             DataBaseRecordCurrentGame(player);
             DataBaseRecordPlayer(player);
             FillGameBoard();
         }
 
+
+        public void PrepareGame()
+        {
+            DataBaseGetRecordedPlayers();
+        }
+
         private void DataBaseGetRecordedPlayers()
         {
-            using (var db = new DataBaseCommunication(_connectionString))
+             using (var db = new DataBaseCommunication(_connectionString))
             {
                  var name = db.GetPlayer();
+                 _viewModel.RecordedPlayers = _viewModel.SetRecordedPlayers(name);
             }
-            //throw new NotImplementedException();
+
         }
     }
 }

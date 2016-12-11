@@ -17,9 +17,9 @@ namespace GICTAPP
         }
 
 
-        private string _id;
+        private int _id;
 
-        public string Id
+        public int Id
         {
             get { return _id; }
             set { _id = value; }
