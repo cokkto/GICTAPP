@@ -47,6 +47,7 @@ namespace GICTAPP
             _dataContext.PlayersOptions.Add(4);
             _dataContext.PlayersOptions.Add(5);
             _dataContext.NumberOfPlayers = _dataContext.PlayersOptions.FirstOrDefault();
+            _dataContext.CardsOptions.Add(2);
             _dataContext.CardsOptions.Add(20);
             _dataContext.CardsOptions.Add(24);
             _dataContext.CardsOptions.Add(30);
