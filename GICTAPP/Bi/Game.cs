@@ -126,20 +126,24 @@ namespace GICTAPP
 
         }
         
-        public void DataBaseRecordCurrentGame(PlayerModel player)
+        public void DataBaseRecordCurrentGame()
         {
             string id = DateTime.Today.Ticks.ToString();
             
             using (var db = new DataBaseCommunication(_connectionString))
             {
-                db.Execute(id);
+                db.Execute(id); // МЕТОД ВОЗВРАЩАЕТ INT ЗАЧЕМ НАМ ЭТО НАДО БЫЛО??
             }
         }
         
         public void DataBaseRecordPlayer(PlayerModel player)
         {
-
+            using (var db = new DataBaseCommunication(_connectionString))
+            {
+                db.ExecutePlayer(player.Name);
+            }
         }
+
         /// <summary>
         ///     Populate gameboard with cards
         /// </summary>
@@ -166,14 +170,22 @@ namespace GICTAPP
         public void StartGame()
         {
             //var player = new PlayerModel();
-            //DataBaseRecordCurrentGame(player);
-            //DataBaseRecordPlayer(player);
+            DataBaseRecordCurrentGame();
+            
 
             _viewModel.Players.Clear();
             foreach (var item in _viewModel.PlayerSelector)
             {
                 _viewModel.Players.Add(new PlayerModel { Name = item.Name });
             }
+
+            //добавление игроков в базу данных но не происходит сровнение на уже существующих в базе((
+            foreach (var item in _viewModel.Players)
+            {
+                if(!_viewModel.RecordedPlayers.Contains(item))
+                DataBaseRecordPlayer(item);
+            }
+            
 
             FillGameBoard();
         }

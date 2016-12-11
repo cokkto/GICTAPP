@@ -116,26 +116,39 @@ namespace GICTAPP
             using (SqlCommand cmd = _connection.CreateCommand())
             {
                 // Добавить параметры
-                cmd.Parameters.AddWithValue("@object_id", 10);
+                ////cmd.Parameters.AddWithValue("@object_id", 10);
                 cmd.Parameters.AddWithValue("@game_id", id);
-                cmd.CommandText = "INSERT INTO CurrentGame(object_id,game_id)VALUES (@object_id, @game_id);";
+                cmd.CommandText = "INSERT INTO CurrentGame(game_id)VALUES (@game_id);";
                 //данные добавляются в базу, которая находится в папке Debag. И считываются из нее же.
+
                 Connection_Open();
                 cmd.ExecuteNonQuery();
 
-                var sql = "SELECT MAX(id) FROM CurrentGame;";
-                var command = new SqlCommand(sql, _connection);
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    Console.WriteLine(String.Format("{0}", reader[0]));
-                }
-                
+                //var sql = "SELECT MAX(id) FROM CurrentGame;";
+                //var command = new SqlCommand(sql, _connection);
+                //SqlDataReader reader = command.ExecuteReader();
+                //while (reader.Read())
+                //{
+                //    Console.WriteLine(String.Format("{0}", reader[0]));
+                //}              
 
                 Connection_Close();
             }
 
             return Convert.ToInt32(0);
+        }
+
+        public void ExecutePlayer(string name) //запись игрока в базу
+        {
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.Parameters.AddWithValue("@admin", 0);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.CommandText = "INSERT INTO Player(admin, name)VALUES (@admin, @name);";
+                Connection_Open();
+                cmd.ExecuteNonQuery();
+                Connection_Close();
+            }
         }
 
         public List<PlayerModel> GetPlayer()

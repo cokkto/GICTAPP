@@ -141,7 +141,7 @@
                         HorizontalAlignment="Center"
                         FontSize="20" 
                         />
-                    <ItemsControl x:Name="PlayerGrid" ItemsSource="{Binding Players}">
+                    <ItemsControl x:Name="PlayerGrid" ItemsSource="{Binding PlayerSelector}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type gictapp:PlayerModel}">
                                 <Grid>
