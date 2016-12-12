@@ -182,8 +182,8 @@ namespace GICTAPP
             //добавление игроков в базу данных но не происходит сровнение на уже существующих в базе((
             foreach (var item in _viewModel.Players)
             {
-                if(!_viewModel.RecordedPlayers.Contains(item))
-                DataBaseRecordPlayer(item);
+                if (!_viewModel.RecordedPlayers.Contains(item))
+                    DataBaseRecordPlayer(item);
             }
             
 
