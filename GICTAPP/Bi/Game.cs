@@ -176,17 +176,15 @@ namespace GICTAPP
             _viewModel.Players.Clear();
             foreach (var item in _viewModel.PlayerSelector)
             {
-                _viewModel.Players.Add(new PlayerModel { Name = item.Name });
+                 _viewModel.Players.Add(new PlayerModel { Name = item.Name });   
             }
 
             //добавление игроков в базу данных но не происходит сровнение на уже существующих в базе((
             foreach (var item in _viewModel.Players)
             {
-                if (!_viewModel.RecordedPlayers.Contains(item))
+                if ((!_viewModel.RecordedPlayers.Contains(item)) || (!_viewModel.Players.Contains(item)))
                     DataBaseRecordPlayer(item);
             }
-            
-
             FillGameBoard();
         }
 
