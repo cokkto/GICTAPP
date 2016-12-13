@@ -178,8 +178,14 @@ namespace GICTAPP
             {
                  _viewModel.Players.Add(new PlayerModel { Name = item.Name });   
             }
-
-            //добавление игроков в базу данных но не происходит сровнение на уже существующих в базе((
+            /// <summary>
+            /// TODO
+            ///     1.добавление игроков в базу данных ниже, но не происходит сравнение на уже существующих в базе - записывает всех подряд (данные записываются в файл из bin\Debag\)((
+            ///     2.непонятно, как и где считать Score у игроков и выделять активного игрока.
+            ///     3.в конце игры объявлять победителя.
+            /// </summary>
+ 
+            //добавление игроков в базу данных
             foreach (var item in _viewModel.Players)
             {
                 if ((!_viewModel.RecordedPlayers.Contains(item)) || (!_viewModel.Players.Contains(item)))
