@@ -10,7 +10,7 @@ namespace GICTAPP
     /// </summary>
     public class MyViewModel : Model
     {
-        private ICommand _myCommand;
+        private ICommand _myCommand; 
         private int _numberOfPlayers;
         private ObservableCollection<int> _playersoptions;
         private ObservableCollection<int> _cardsOptions;
@@ -36,7 +36,7 @@ namespace GICTAPP
         ///     Swap card command
         /// </summary>
         public ICommand CommandSwapCard
-        {
+        { 
             get { return _commandSwapCard; }
             set { SetProperty(ref _commandSwapCard, value); }
         }
@@ -50,7 +50,7 @@ namespace GICTAPP
             set
             {
                 SetProperty(ref _numberOfPlayers, value);
-                PlayerSelector.Clear();
+                PlayerSelector.Clear(); 
                 for (int i = 0; i < _numberOfPlayers; i++)
                 {
                     PlayerSelector.Add(new PlayerSelectorModel { Id = i});
@@ -61,14 +61,14 @@ namespace GICTAPP
         public ObservableCollection<PlayerSelectorModel> PlayerSelector
         {
             get
-            {
+            { 
                 return _playerSelector ?? (_playerSelector = new ObservableCollection<PlayerSelectorModel>());
             }
             set { SetProperty(ref _playerSelector, value); }
         }
 
         public ObservableCollection<PlayerModel> RecordedPlayers
-        {
+        { 
             get { return _recordedPlayers ?? (_recordedPlayers = SetRecordedPlayers()); }
             set { SetProperty(ref _recordedPlayers, value); }
         }
@@ -126,7 +126,7 @@ namespace GICTAPP
         public ObservableCollection<PlayerModel> SetRecordedPlayers(IList<PlayerModel> models = null)
         {
             if (_recordedPlayers == null) _recordedPlayers = new ObservableCollection<PlayerModel>();
-            RecordedPlayers.Clear();
+            RecordedPlayers.Clear(); 
             RecordedPlayers.Add(new PlayerModel { Name = "New player" });
             if (models == null) return _recordedPlayers;
             foreach (var item in models)
@@ -140,7 +140,7 @@ namespace GICTAPP
         ///     Players that are playing current game
         /// </summary>
         public ObservableCollection<PlayerModel> Players
-        {
+        { 
             get { return _players ?? (_players = new ObservableCollection<PlayerModel>()); }
             set { SetProperty(ref _players, value); }
         }

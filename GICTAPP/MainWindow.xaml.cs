@@ -17,12 +17,12 @@ namespace GICTAPP
         private readonly List<Image> _myImages = new List<Image>();
         private readonly List<Player> _myPlayers = new List<Player>();
         private MyViewModel _dataContext;
-        private Game _myGame;
+        private Game _myGame; 
 
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += OnLoaded;
+            Loaded += OnLoaded; 
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace GICTAPP
         {
             // assign datacontext
             _dataContext = new MyViewModel();
-            DataContext = _dataContext;
+            DataContext = _dataContext; 
 
             // set visibility of views
             ViewStart.Visibility = Visibility.Visible;
@@ -47,7 +47,7 @@ namespace GICTAPP
             _dataContext.PlayersOptions.Add(4);
             _dataContext.PlayersOptions.Add(5);
             _dataContext.NumberOfPlayers = _dataContext.PlayersOptions.FirstOrDefault();
-            _dataContext.CardsOptions.Add(2);
+            //_dataContext.CardsOptions.Add(2);
             _dataContext.CardsOptions.Add(20);
             _dataContext.CardsOptions.Add(24);
             _dataContext.CardsOptions.Add(30);

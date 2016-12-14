@@ -10,7 +10,7 @@ namespace GICTAPP
     ///     Game state enum
     /// </summary>
     public enum StateEnum
-    {
+    { 
         AllClosed,
         OneOpened,
         TwoOpened

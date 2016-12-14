@@ -14,13 +14,13 @@ namespace GICTAPP
         private readonly SqlConnection _connection;
 
         public DataBaseCommunication(string path)
-        {
+        { 
             _connection = new SqlConnection(path);
         }
 
 
         public void Dispose()
-        {
+        { 
             if (_connection != null)
             {
                 Connection_Close();
@@ -28,7 +28,7 @@ namespace GICTAPP
         }
 
         public BitmapImage Get_Images(int num)
-        {
+        { 
             var query = "select content from GameObject where object_id=" + num;
             var createCommand = new SqlCommand(query, _connection);
             createCommand.ExecuteNonQuery();
@@ -60,7 +60,7 @@ namespace GICTAPP
         }
 
         public List<BitmapImage> Get_Images()
-        {
+        { 
             var query = "select content from GameObject";
             var createCommand = new SqlCommand(query, _connection);
             createCommand.ExecuteNonQuery();
@@ -94,7 +94,7 @@ namespace GICTAPP
         }
 
         public void Connection_Open()
-        {
+        { 
             if (_connection.State != ConnectionState.Open)
                 try
                 {
@@ -107,7 +107,7 @@ namespace GICTAPP
         }
 
         public void Connection_Close()
-        {
+        { 
             _connection.Close();
         }
 

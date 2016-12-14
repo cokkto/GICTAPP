@@ -10,12 +10,12 @@ namespace GICTAPP
     ///     Wrapper over ICommand interface to implement Execute and CanEecute functionality
     /// </summary>
     public class RelayCommand : ICommand
-    {
+    { 
         private Predicate<object> _canExecute;
         private Action<object> _execute;
 
         public RelayCommand(Predicate<object> canExecute, Action<object> execute)
-        {
+        { 
             this._canExecute = canExecute;
             this._execute = execute;
         }
@@ -24,7 +24,7 @@ namespace GICTAPP
         ///     Event to raise CanExecute on changes
         /// </summary>
         public event EventHandler CanExecuteChanged
-        {
+        { 
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
@@ -33,7 +33,7 @@ namespace GICTAPP
         ///     Evaluate posibility to execute command
         /// </summary>
         public bool CanExecute(object parameter)
-        {
+        { 
             return _canExecute(parameter);
         }
 
@@ -42,7 +42,7 @@ namespace GICTAPP
         /// </summary>
         /// <param name="parameter"></param>
         public void Execute(object parameter)
-        {
+        { 
             _execute(parameter);
         }
     }

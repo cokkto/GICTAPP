@@ -7,12 +7,12 @@ namespace GICTAPP
     ///     Wrapper over INotifyPropertyChanged to raise propertyChanged events in bound models
     /// </summary>
     public class Model : INotifyPropertyChanged
-    {
+    { 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if(PropertyChanged != null)
+            if(PropertyChanged != null) 
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
@@ -23,7 +23,7 @@ namespace GICTAPP
                 return false;
             }
 
-            field = value;
+            field = value; 
 
             OnPropertyChanged(propertyName);
 

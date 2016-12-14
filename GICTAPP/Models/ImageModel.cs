@@ -14,11 +14,11 @@ namespace GICTAPP
     {
         private bool _isCoverVisible;
         private string _imageSource;
-        private string _guid;
+        private string _guid; 
 
         public ImageModel()
         {
-            _guid = Guid.NewGuid().ToString();
+            _guid = Guid.NewGuid().ToString(); 
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace GICTAPP
         private int _playerScore;
 
         public PlayerModel()
-        {
+        { 
             _id = Guid.NewGuid().ToString();
         }
 
@@ -22,7 +22,7 @@ namespace GICTAPP
         ///     Player unique Id
         /// </summary>
         public string Id 
-        { 
+        {  
             get { return _id; }
         }
 
@@ -31,7 +31,7 @@ namespace GICTAPP
         ///     I not sure is needed
         /// </summary>
         public string Name
-        {
+        { 
             get { return _name; }
             set { SetProperty(ref _name, value); }
         }
@@ -49,7 +49,7 @@ namespace GICTAPP
         ///     Give a score to Player
         /// </summary>
         public int PlayerScore
-        {
+        { 
             get { return _playerScore; }
             set { SetProperty(ref _playerScore, value); }
         }

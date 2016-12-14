@@ -48,19 +48,19 @@ namespace GICTAPP
         /// <param name="obj"></param>
         /// <returns></returns>
         private bool CanExecuteSwapCard(object obj)
-        {
+        { 
             if (!(obj is ImageModel)) return false;
             if (_isStarted) return true;
             return ((ImageModel) obj).IsCoverVisible && !_matchedCards.Contains(((ImageModel) obj).Id);
         }
 
         private void ExecuteSwapCard(object o)
-        {
+        {  
             if (!(o is ImageModel)) return;
             var image = _viewModel.Images.FirstOrDefault(x => x.Id == ((ImageModel) o).Id);
             if (image == null) return;
             _isStarted = false;
-            //TODO записать вбазу данных game_ig, game_object(images)
+            
             switch (_cardsOpened)
             {
                 // 2 cards opened but not mathed - close previous 2
@@ -112,12 +112,12 @@ namespace GICTAPP
         }
 
         private void EndGame()
-        {
+        { 
             System.Windows.MessageBox.Show("Endgame");
         }
 
         private bool isEndGame()
-        {
+        { 
             return _matchedCards.Count == _viewModel.NumberOfCards;
         }
 
@@ -148,7 +148,7 @@ namespace GICTAPP
         ///     Populate gameboard with cards
         /// </summary>
         public void FillGameBoard()
-        {
+        { 
             var halfCards = _viewModel.NumberOfCards/2;
             var path = Directory.GetCurrentDirectory() + "/Resources/";
             // get images from folder
@@ -181,7 +181,7 @@ namespace GICTAPP
             /// <summary>
             /// TODO
             ///     1.добавление игроков в базу данных ниже, но не происходит сравнение на уже существующих в базе - записывает всех подряд (данные записываются в файл из bin\Debag\)((
-            ///     2.непонятно, как и где считать Score у игроков и выделять активного игрока.
+            ///     2.сделать Score у игроков и выделять активного игрока.
             ///     3.в конце игры объявлять победителя.
             ///     4.Если ни один пользователь не выбран, то игру можно запустить, но она вывалит ошибку. Может, кнопку Старт скрывать, пока пользователь не выбран(не создан) 
             /// </summary>
@@ -197,7 +197,7 @@ namespace GICTAPP
 
 
         public void PrepareGame()
-        {
+        { 
             DataBaseGetRecordedPlayers();
         }
 
